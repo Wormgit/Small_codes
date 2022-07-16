@@ -1,0 +1,81 @@
+------- illustration -------
+
+GENERAL:
+1video_info			 how many frames, how long
+2if_txt_item_in_folders
+3resize.py                       resize and padding. make test or traning images smaller.
+4remove_space_intxt		 remove space (for videos???)
+color
+not_useful                       pair positive negetive
+
+
+
+DETECTION_DATA:
+1filter_image_with_mxl.py         move image and annotations to another file. many options
+					#filter image with xml and give count name(00001)
+					#do not filter image. give count name only
+					#filter image with xml and skip count name without xml(name number != count).
+					#filter image without xml and skip count name with xml(name number != count).
+2move_select_xml_and_jpg.py      you can define start image and end image. Others are similar to filter_image_with_mxl.py
+3randonm_percentage_split	 split train and val image to a txt 
+4split_selected_images		 if you have a txt file defining selected image. SO does .xml
+5split_train_val                 every 1 in 10 is validation
+6split_will_images	         if you have a txt file defining selected image. SO does .xml 
+
+
+DETECTION_LABELS_TRANS:
+pre_to_xml in                    also in 0Projects/roLabelImg-master/tests   prediction to xml
+get_json_info_w10_fold    	 ??
+json_to_coco_faster_rcnn
+json_to_coco_yolo
+txt_to_coco.py			 
+xml_fix_coco (rotated)		 (x1,y1,w,h,a) to turn separate .xml to one .json file.
+xml_to_coco			 (x1,y1,w,h)
+
+
+
+ID_DATA:
+1renumber_add_0_month_date	 turn names like 2020-9-3 to 2020-09-03.
+2remove_video_depth		 
+3copy3class_to2class_remove0     remove a middle folder named 0. use it when transfering the format of data.
+				 for rgb images train or test.
+4_186_remove4days                remove 4 days images. In cv4 aminnal, I used to mix the training in testing. 
+			         This is to seperate training data.
+5copy_base_csv                   making training data
+6copy2class_to3class_add0
+
+split_json_2class_random	 split train test val with the given ratio. no 0 folder in the middle
+split_json_3class                
+split_train_val_t_willversion
+split_t_val_t_remove_black
+split_val_test_3                 split val and test images to 2 folders by copying (2 class or 3?), no balck cattle
+
+
+NEW_project2022:
+1select_frames_add_0_month_date  The input is frames with other files extracted from videos. we extracte frames and put the to move_files
+4makeVideo4Train_day
+
+remove_less_than1_image
+seperate_data_by_day
+
+Functions:                       ellip, gmm, knn, ari
+
+
+
+Visualisation_train_val          没细看
+    
+
+------- see labeled images -------
+
+you can use labelling tool to see the annotations from https://github.com/cgvict/roLabelImg
+
+The attached is code to see boxes in case you need to check the labelled data. 
+
+Put .xml and .jpg in the same file.
+filter_image_with_mxl.py         to filter image without labels.
+xml_fix_coco (rotated).py        to turn separate .xml to one .json file.
+glide_test.py                    to see the boxed and head. 
+
+Just delete the original visualization.py in keras_retinanet.utils and use this one. 
+I tried running what you said to view the rotated rectangles, but couldn't get it to work.
+In glide_test.py on line 13 "from keras_retinanet.utils.visualization import draw_box, draw_caption, draw_rbox, get_rbox_poly", it couldn't find draw_rbox, and get_rbox_poly.
